@@ -1,0 +1,91 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Share Your Success Story - Career Council{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Share Your Success Story</h2>
+                    <p class="text-center text-muted mb-4">Inspire others by sharing how Career Council helped you find your path!</p>
+
+                    {% if messages %}
+                    <div class="messages mb-4">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="invalid-feedback">
+                                Please provide your name.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="career_path" class="form-label">Your Career Path</label>
+                            <input type="text" class="form-control" id="career_path" name="career_path" 
+                                   placeholder="e.g., Software Engineer, UX Designer, Data Scientist" required>
+                            <div class="invalid-feedback">
+                                Please provide your career path.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Your Photo</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+                            <div class="invalid-feedback">
+                                Please provide a photo.
+                            </div>
+                            <small class="text-muted">Please upload a professional photo of yourself.</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Your Success Story</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required
+                                      placeholder="Share how Career Council helped you in your career journey..."></textarea>
+                            <div class="invalid-feedback">
+                                Please share your story.
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit Your Story</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %} 

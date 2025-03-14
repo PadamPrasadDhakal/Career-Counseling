@@ -1,0 +1,218 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load cropping %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'image_cropping/css/jquery.Jcrop.min.css' %}" rel="stylesheet">
+<style>
+    .profile-img-container img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .cropping-container {
+        max-width: 500px;
+        margin: 20px auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Your Profile</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-4 text-center">
+                            <div class="profile-img-container mb-3">
+                                {% if user.photo %}
+                                    <img src="{{ user.photo.url }}" alt="Profile" class="img-fluid">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/200" alt="Profile" class="img-fluid">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>{{ user.username }}</h4>
+                            <p class="text-muted">{{ user.email }}</p>
+                            {% if user.phone %}
+                                <p class="text-muted">{{ user.phone }}</p>
+                            {% endif %}
+                            <p>Member since: {{ user.date_joined|date:"Y-m-d" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-top pt-3">
+                        <h5 class="mb-3">Account Information</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Username:</strong> {{ user.username }}</p>
+                                <p><strong>Email:</strong> {{ user.email }}</p>
+                                {% if user.phone %}
+                                    <p><strong>Phone:</strong> {{ user.phone }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Last Login:</strong> {{ user.last_login|date:"Y-m-d" }} {{ user.last_login|time:"H:i" }}</p>
+                                <p><strong>Account Status:</strong> 
+                                    {% if user.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Inactive</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Edit Profile Form -->
+                    <div class="border-top pt-3 mt-3" id="editProfileForm" style="display: none;">
+                        <h5 class="mb-3">Edit Profile</h5>
+                        <form method="post" enctype="multipart/form-data" action="{% url 'core:edit_profile' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" value="{{ user.phone|default:'' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ user.date_of_birth|date:'Y-m-d'|default:'' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="occupation" class="form-label">Occupation</label>
+                                        <input type="text" class="form-control" id="occupation" name="occupation" value="{{ user.occupation|default:'' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="education" class="form-label">Education</label>
+                                        <input type="text" class="form-control" id="education" name="education" value="{{ user.education|default:'' }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" value="{{ user.address|default:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Bio</label>
+                                <textarea class="form-control" id="bio" name="bio" rows="3">{{ user.bio|default:'' }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="photo" class="form-label">Profile Photo</label>
+                                <input type="file" class="form-control" id="photo" name="photo">
+                                {% if user.photo %}
+                                    <div class="cropping-container mt-3">
+                                        <h6>Crop Your Photo</h6>
+                                        {% comment %} {% cropping user %} {% endcomment %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="social_links" class="form-label">Social Links (JSON format)</label>
+                                <input type="text" class="form-control" id="social_links" name="social_links" 
+                                       value="{{ user.social_links|default:'{}' }}"
+                                       placeholder='{"linkedin": "https://linkedin.com/in/username", "github": "https://github.com/username"}'>
+                                <small class="form-text text-muted">Enter your social media links in JSON format</small>
+                            </div>
+                            
+                            <div class="text-end">
+                                <button type="button" class="btn btn-secondary me-2" onclick="toggleEditForm()">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="text-end mt-4">
+                        <a href="{% url 'core:change_password' %}" class="btn btn-outline-primary me-2">Change Password</a>
+                        <button class="btn btn-primary" onclick="toggleEditForm()">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Login Activity -->
+            <div class="card shadow mt-4">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Recent Login Activity</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Status</th>
+                                    <th>Device</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for login in user.login_attempts.all|slice:":5" %}
+                                <tr>
+                                    <td>{{ login.timestamp|date:"Y-m-d" }} {{ login.timestamp|time:"H:i" }}</td>
+                                    <td>
+                                        {% if login.success %}
+                                            <span class="badge bg-success">Success</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Failed</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ login.device_name|default:'Unknown Device' }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center">No login history available</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'image_cropping/js/jquery.min.js' %}"></script>
+<script src="{% static 'image_cropping/js/jquery.Jcrop.min.js' %}"></script>
+<script src="{% static 'image_cropping/js/image_cropping.js' %}"></script>
+<script>
+function toggleEditForm() {
+    const form = document.getElementById('editProfileForm');
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+}
+
+// Initialize cropping when photo is selected
+document.getElementById('photo').addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+        const form = e.target.closest('form');
+        form.submit();
+    }
+});
+</script>
+{% endblock %} 

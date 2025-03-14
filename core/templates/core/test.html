@@ -1,0 +1,290 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Professional Career Assessment - Find Your Ideal Career Path{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Import theme colors */
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --dark-color: #2c3e50;
+        --light-color: #f8f9fa;
+        --gray-color: #6c757d;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+    }
+
+    .test-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    .option-label {
+        display: block;
+        margin: 1rem 0;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .option-label:hover {
+        background-color: var(--light-color);
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .option-input {
+        margin-right: 1rem;
+    }
+    
+    .option-text {
+        font-size: 1.1rem;
+    }
+    
+    .progress {
+        height: 0.5rem;
+        margin: 2rem 0;
+    }
+    
+    .chart-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+    
+    .career-card {
+        height: 100%;
+        transition: transform 0.3s ease;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .career-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .career-match {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .assessment-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--light-color);
+        border-radius: 20px;
+        margin: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .dimension-title {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .dimension-explanation {
+        background-color: var(--light-color);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+
+    /* Override Bootstrap theme inconsistencies */
+    body .navbar .btn-primary,
+    body .navbar .dropdown .btn-primary,
+    body #navbarNav .btn-primary {
+        background-color: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
+        color: white !important;
+    }
+
+    body .navbar .btn-primary:hover,
+    body .navbar .dropdown .btn-primary:hover,
+    body #navbarNav .btn-primary:hover {
+        background-color: #27ae60 !important;
+        border-color: #27ae60 !important;
+        color: white !important;
+    }
+
+    body .navbar .btn-outline-primary,
+    body .navbar .dropdown .btn-outline-primary,
+    body #navbarNav .btn-outline-primary {
+        color: var(--dark-color) !important;
+        border-color: transparent !important;
+        background-color: transparent !important;
+    }
+
+    body .navbar .btn-outline-primary:hover,
+    body .navbar .dropdown .btn-outline-primary:hover,
+    body #navbarNav .btn-outline-primary:hover {
+        color: var(--primary-color) !important;
+        background-color: transparent !important;
+    }
+
+    /* Regular buttons in the test page */
+    .test-container .btn-primary {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        color: white !important;
+    }
+
+    .test-container .btn-primary:hover {
+        background-color: #217bb8 !important;
+        border-color: #217bb8 !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .test-container .btn-secondary {
+        background-color: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
+        color: white !important;
+    }
+
+    .test-container .btn-secondary:hover {
+        background-color:rgb(22, 147, 74) !important;
+        border-color: #27ae60 !important;
+        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .progress-bar {
+        background-color: var(--primary-color) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="test-container">
+    <!-- Test Introduction -->
+    <div id="test-intro">
+        <h1 class="text-center mb-4">Professional Career Assessment</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">About This Assessment</h5>
+                <p class="card-text">This comprehensive career assessment combines two powerful frameworks:</p>
+                <ul>
+                    <li><strong>Holland Code (RIASEC)</strong> - Evaluates your career interests across six dimensions: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional.</li>
+                    <li><strong>Big Five Personality Traits</strong> - Measures your personality across five key dimensions: Openness, Conscientiousness, Extraversion, Agreeableness, and Emotional Stability.</li>
+                </ul>
+                <h5 class="mt-4">What You'll Gain:</h5>
+                <ul>
+                    <li>Detailed insights into your career interests and personality traits</li>
+                    <li>Personalized career recommendations based on your profile</li>
+                    <li>Understanding of work environments where you're likely to thrive</li>
+                    <li>Guidance for career development and job search</li>
+                </ul>
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle"></i> The assessment takes approximately 15-20 minutes to complete. For the most accurate results, please answer honestly based on how you truly feel, not how you think you should respond.
+                </div>
+            </div>
+        </div>
+        <button id="start-test" class="btn btn-primary btn-lg d-block mx-auto">Start Assessment</button>
+    </div>
+
+    <!-- Test UI -->
+    <div id="test-ui" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 id="category-indicator" class="mb-0">Career Interest</h4>
+            <span id="question-counter" class="text-muted">Question 1 of 42</span>
+        </div>
+        
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 id="question" class="card-title mb-4"></h5>
+                <div id="options-container"></div>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+            <button id="prev-question" class="btn btn-secondary" disabled>Previous Question</button>
+            <button id="next-question" class="btn btn-primary" disabled>Next Question</button>
+        </div>
+    </div>
+
+    <!-- Results Container -->
+    <div id="result-container" style="display: none;">
+        <h2 class="text-center mb-4">Your Career Assessment Results</h2>
+        
+        <!-- Result Summary -->
+        <div id="result-summary" class="card mb-4">
+            <div class="card-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Holland Code Results -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="dimension-title">Career Interests Profile</h3>
+                <div class="chart-container">
+                    <canvas id="holland-chart"></canvas>
+                </div>
+                <div id="holland-explanation" class="dimension-explanation">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Personality Results -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="dimension-title">Personality Profile</h3>
+                <div class="chart-container">
+                    <canvas id="big-five-chart"></canvas>
+                </div>
+                <div id="personality-explanation" class="dimension-explanation">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Career Recommendations -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="dimension-title">Recommended Career Paths</h3>
+                <p class="text-muted mb-4">Based on your unique combination of interests and personality traits, here are some career paths you might find fulfilling:</p>
+                <div id="career-recommendations" class="row">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="card">
+            <div class="card-body">
+                <h3 class="dimension-title">Next Steps</h3>
+                <ol>
+                    <li class="mb-3">Review your detailed results and reflect on how they align with your current career goals.</li>
+                    <li class="mb-3">Research the recommended career paths to learn more about educational requirements and job opportunities.</li>
+                    <li class="mb-3">Consider scheduling a session with a career counselor to discuss your results in detail.</li>
+                    <li class="mb-3">Update your career development plan based on these insights.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'core/js/career-assessment.js' %}"></script>
+{% endblock %} 

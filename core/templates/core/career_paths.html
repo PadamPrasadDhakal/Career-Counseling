@@ -1,0 +1,185 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Career Paths - Career Council{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="test-header bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">Explore Career Paths</h1>
+                <p class="lead text-muted">Discover diverse career options across different industries and find your perfect fit</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Career Categories Section -->
+<section class="section py-5">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2 class="mb-3">Career Categories</h2>
+            <p class="text-muted">Browse careers by industry or field</p>
+        </div>
+        
+        <div class="row">
+            <!-- Technology -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-laptop-code fa-2x text-primary"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Technology</h3>
+                        </div>
+                        <p class="text-muted">Careers in software development, data science, cybersecurity, and IT infrastructure.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Software Developer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Data Scientist</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Cybersecurity Analyst</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Cloud Engineer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">UX/UI Designer</span>
+                        </div>
+                        <a href="{% url 'core:technology_careers' %}" class="btn btn-outline-primary">View Technology Careers</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Healthcare -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-heartbeat fa-2x text-danger"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Healthcare</h3>
+                        </div>
+                        <p class="text-muted">Careers in medicine, nursing, therapy, public health, and healthcare administration.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Physician</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Nurse Practitioner</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Physical Therapist</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Healthcare Manager</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Medical Researcher</span>
+                        </div>
+                        <a href="{% url 'core:healthcare_careers' %}" class="btn btn-outline-primary">View Healthcare Careers</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Business -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-chart-line fa-2x text-success"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Business</h3>
+                        </div>
+                        <p class="text-muted">Careers in finance, marketing, management, entrepreneurship, and business analysis.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Financial Analyst</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Marketing Manager</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Business Consultant</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Project Manager</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Entrepreneur</span>
+                        </div>
+                        <a href="{% url 'core:business_careers' %}" class="btn btn-outline-primary">View Business Careers</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Creative Arts -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-paint-brush fa-2x text-info"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Creative Arts</h3>
+                        </div>
+                        <p class="text-muted">Careers in design, writing, media production, performing arts, and content creation.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Graphic Designer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Content Writer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Film Producer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Interior Designer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Digital Artist</span>
+                        </div>
+                        <a href="{% url 'core:creative_arts_careers' %}" class="btn btn-outline-primary">View Creative Arts Careers</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-graduation-cap fa-2x text-warning"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Education</h3>
+                        </div>
+                        <p class="text-muted">Careers in teaching, educational administration, school counseling, and training.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Teacher</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">School Principal</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">School Counselor</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Professor</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Corporate Trainer</span>
+                        </div>
+                        <a href="{% url 'core:education_careers' %}" class="btn btn-outline-primary">View Education Careers</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Science & Research -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-microscope fa-2x text-purple"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Science & Research</h3>
+                        </div>
+                        <p class="text-muted">Careers in scientific research, laboratory work, environmental science, and innovation.</p>
+                        <div class="mt-3 mb-3">
+                            <span class="badge bg-light text-dark me-2 mb-2">Research Scientist</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Biologist</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Chemical Engineer</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Environmental Scientist</span>
+                            <span class="badge bg-light text-dark me-2 mb-2">Food Scientist</span>
+                        </div>
+                        <a href="{% url 'core:science_research_careers' %}" class="btn btn-outline-primary">View Science Research Careers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Career Search -->
+<section class="section bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <h3 class="mb-4">Find Your Ideal Career</h3>
+                        <p class="text-muted mb-4">Take our psychometric test to discover careers that match your personality, skills, and interests.</p>
+                        <a href="{% url 'core:test' %}" class="btn btn-primary btn-lg">Start Career Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

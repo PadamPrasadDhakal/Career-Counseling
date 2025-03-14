@@ -1,0 +1,297 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Career Council{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="test-header bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-3">About Career Council</h1>
+                <p class="lead text-muted">Empowering students to make informed career decisions through personalized guidance and comprehensive resources</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mission Section -->
+<section class="section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{% static 'core/images/mission.jpg' %}" alt="Our Mission" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="section-title mb-4">Our Mission</h2>
+                <p class="text-muted mb-4">Career Council is dedicated to helping students navigate their career journey with confidence. We provide personalized guidance, comprehensive resources, and expert support to help you make informed decisions about your future.</p>
+                <p class="text-muted">Our platform combines cutting-edge technology with human expertise to deliver a unique career guidance experience that adapts to your individual needs and aspirations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="section bg-light py-5">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2 class="mb-3">Our Values</h2>
+            <p class="text-muted">The principles that guide everything we do</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-user-graduate fa-2x text-primary"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Student-First</h3>
+                        </div>
+                        <p class="text-muted mb-0">Your success is our priority. We're committed to providing personalized guidance that puts your interests and goals first.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-lightbulb fa-2x text-warning"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Innovation</h3>
+                        </div>
+                        <p class="text-muted mb-0">We continuously evolve our platform with the latest technology and career guidance methodologies to serve you better.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="feature-icon me-3">
+                                <i class="fas fa-handshake fa-2x text-success"></i>
+                            </span>
+                            <h3 class="h4 mb-0">Integrity</h3>
+                        </div>
+                        <p class="text-muted mb-0">We maintain the highest standards of professionalism and ethics in all our interactions and recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Developers Section -->
+<section class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-4 fw-bold mb-3">Meet Our Developers</h1>
+            <p class="lead text-muted">The talented team behind Career Council</p>
+        </div>
+    </div>
+
+    <!-- Manish's Profile -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="text-center">
+                <img src="{% static 'core/images/developers/manish.jpg' %}" 
+                     alt="Manish" 
+                     class="img-fluid rounded-circle developer-profile-img shadow"
+                     style="width: 250px; height: 250px; object-fit: cover;"
+                     onerror="this.src='https://via.placeholder.com/250?text=Manish'">
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h2 class="mb-3">Manish</h2>
+            <h5 class="text-primary mb-4">Full Stack Developer</h5>
+            <p class="mb-4">With over 5 years of experience in web development, Manish brings expertise in both frontend and backend technologies. His passion for creating intuitive user experiences and efficient code has been instrumental in building Career Council.</p>
+            
+            <h5 class="mb-3">Core Skills:</h5>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Django & Python</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>React & JavaScript</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Security Implementation</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Database Design</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>RESTful APIs</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>AWS Cloud Services</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/manish" target="_blank" class="btn btn-outline-dark me-2">
+                    <i class="fab fa-github me-2"></i>GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/manish-giri-b4a45727a/" target="_blank" class="btn btn-outline-primary me-2">
+                    <i class="fab fa-linkedin-in me-2"></i>LinkedIn
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100059729837906" class="btn btn-facebook me-2">
+                    <i class="fab fa-facebook me-2"></i>Facebook
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- Padam's Profile -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-lg-8 order-lg-1 order-2">
+            <h2 class="mb-3">Padam</h2>
+            <h5 class="text-primary mb-4">Backend Developer</h5>
+            <p class="mb-4">Padam specializes in building robust and scalable backend systems. With a strong background in Python and Django, he has implemented the core functionality of Career Council, including the psychometric testing algorithm and secure data management systems.</p>
+            
+            <h5 class="mb-3">Core Skills:</h5>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Python Development</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Django Framework</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Database Optimization</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>API Development</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Data Science</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Algorithm Development</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/PadamPrasadDhakal" target="_blank" class="btn btn-outline-dark me-2">
+                    <i class="fab fa-github me-2"></i>GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/padam-prasad-dhakal-5976702b9/" target="_blank" class="btn btn-outline-primary me-2">
+                    <i class="fab fa-linkedin-in me-2"></i>LinkedIn
+                </a>
+                <a href="https://www.facebook.com/sohan.dhakal.18" class="btn btn-facebook me-2">
+                    <i class="fab fa-facebook me-2"></i>Facebook
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0 order-lg-2 order-1">
+            <div class="text-center">
+                <img src="{% static 'core/images/developers/padam.jpg' %}" 
+                     alt="Padam" 
+                     class="img-fluid rounded-circle developer-profile-img shadow"
+                     style="width: 250px; height: 250px; object-fit: cover;"
+                     onerror="this.src='https://via.placeholder.com/250?text=Padam'">
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Contributions Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 bg-light">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Project Contributions</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5>Manish's Contributions</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-code text-primary me-2"></i>Frontend Development</li>
+                                        <li class="mb-2"><i class="fas fa-paint-brush text-primary me-2"></i>UI/UX Design</li>
+                                        <li class="mb-2"><i class="fas fa-mobile-alt text-primary me-2"></i>Responsive Design</li>
+                                        <li class="mb-2"><i class="fas fa-server text-primary me-2"></i>API Integration</li>
+                                        <li class="mb-2"><i class="fas fa-sitemap text-primary me-2"></i>Site Architecture</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5>Padam's Contributions</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-database text-primary me-2"></i>Database Design</li>
+                                        <li class="mb-2"><i class="fas fa-lock text-primary me-2"></i>Authentication System</li>
+                                        <li class="mb-2"><i class="fas fa-brain text-primary me-2"></i>Psychometric Algorithm</li>
+                                        <li class="mb-2"><i class="fas fa-server text-primary me-2"></i>Server Configuration</li>
+                                        <li class="mb-2"><i class="fas fa-code-branch text-primary me-2"></i>Version Control</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <h3 class="mb-4">Get in Touch</h3>
+                        <p class="text-muted mb-4">Have questions about our services? We're here to help!</p>
+                        <a href="{% url 'core:contact' %}" class="btn btn-primary btn-lg">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .developer-profile-img {
+        transition: transform 0.3s ease;
+        border: 5px solid #ffffff;
+    }
+
+    .developer-profile-img:hover {
+        transform: scale(1.05);
+    }
+
+    .social-links .btn {
+        transition: all 0.3s ease;
+    }
+
+    .social-links .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn-facebook {
+        background-color: #1877f2;
+        border-color: #1877f2;
+        color: white;
+    }
+
+    .btn-facebook:hover {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .order-lg-1 {
+            order: 2 !important;
+        }
+        .order-lg-2 {
+            order: 1 !important;
+        }
+    }
+</style>
+{% endblock %} 

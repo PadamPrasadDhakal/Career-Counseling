@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-4">{{ title }}</h1>
+            <div class="row">
+                {% for career in careers %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="h5 mb-0">{{ career.title }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ career.description }}</p>
+                            
+                            <h5 class="mt-3">Required Skills:</h5>
+                            <ul class="list-unstyled">
+                                {% for skill in career.skills %}
+                                <li><i class="fas fa-check-circle text-success me-2"></i>{{ skill }}</li>
+                                {% endfor %}
+                            </ul>
+                            
+                            <div class="mt-3">
+                                <p><strong>Salary Range:</strong><br>{{ career.salary_range }}</p>
+                                <p><strong>Required Education:</strong><br>{{ career.education }}</p>
+                                <p><strong>Job Outlook:</strong><br>{{ career.growth }}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="{% url 'core:career_paths' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to All Career Paths
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
