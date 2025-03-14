@@ -192,4 +192,15 @@ THUMBNAIL_PROCESSORS = (
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 IMAGE_CROPPING_BACKEND = 'image_cropping.backends.easy_thumbs.EasyThumbnailsBackend'
-IMAGE_CROPPING_BACKEND_PARAMS = {} 
+IMAGE_CROPPING_BACKEND_PARAMS = {}
+
+# Additional thumbnail settings
+THUMBNAIL_ALIASES = {
+    '': {
+        'profile_small': {'size': (40, 40), 'crop': True},
+        'profile_medium': {'size': (200, 200), 'crop': True},
+    },
+}
+
+# Size for the profile button image
+PROFILE_THUMBNAIL_SIZE = (28, 28) 

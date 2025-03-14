@@ -66,8 +66,10 @@ def signup(request):
                 user_agent=user_agent
             )
             
-            # Log in the user after signup
-            login(request, user)
+            # Log in the user after signup - specify the backend
+            from django.contrib.auth import login
+            from django.contrib.auth.backends import ModelBackend
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, f"Account created successfully for {username}!")
             return redirect('core:home')
         else:
@@ -335,11 +337,19 @@ def edit_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            form.save()
+            # Save the form data
+            user = form.save()
+            
+            # The cropping coordinates are automatically saved by the form
+            # because we're using ImageRatioField which handles its own saving
+            
             messages.success(request, 'Your profile has been updated successfully.')
             return redirect('core:profile')
         else:
-            messages.error(request, 'Please correct the errors below.')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+            
     return redirect('core:profile')
 
 def change_password(request):

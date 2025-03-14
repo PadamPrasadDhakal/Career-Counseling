@@ -108,11 +108,22 @@
             border-radius: 30px;
             background-color: var(--secondary-color, #2ecc71);
             border-color: var(--secondary-color, #2ecc71);
+            display: flex;
+            align-items: center;
         }
         
         .logout-btn {
             border-radius: 25px;
             margin-right:-100px;
+        }
+        
+        /* Profile photo in button */
+        .profile-photo-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
         }
         
         /* Make button icons slightly larger */
@@ -207,7 +218,14 @@
                     
                     {% if user.is_authenticated %}
                         <a href="{% url 'core:profile' %}" class="btn btn-primary profile-btn me-2 user-btn">
-                            <i class="fas fa-user me-1"></i> {{ user.username }}'s Profile
+                            {% if user.photo %}
+                                {% load cropping %}
+                                {% cropped_thumbnail user "cropping" scale=1.0 as thumb %}
+                                <img src="{{ thumb.url }}" alt="{{ user.username }}" class="profile-photo-btn">
+                            {% else %}
+                                <i class="fas fa-user me-1"></i>
+                            {% endif %}
+                            {{ user.username }}'s Profile
                         </a>
                         <a href="{% url 'core:logout' %}" class="btn btn-outline-primary logout-btn user-btn">
                             <i class="fas fa-sign-out-alt me-1"></i> Logout
