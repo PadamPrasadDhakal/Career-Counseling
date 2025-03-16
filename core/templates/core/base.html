@@ -219,9 +219,7 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'core:profile' %}" class="btn btn-primary profile-btn me-2 user-btn">
                             {% if user.photo %}
-                                {% load cropping %}
-                                {% cropped_thumbnail user "cropping" scale=1.0 as thumb %}
-                                <img src="{{ thumb.url }}" alt="{{ user.username }}" class="profile-photo-btn">
+                                <img src="{{ user.photo.url }}" alt="{{ user.username }}" class="profile-photo-btn">
                             {% else %}
                                 <i class="fas fa-user me-1"></i>
                             {% endif %}

@@ -338,11 +338,7 @@ def edit_profile(request):
         form = UserProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             # Save the form data
-            user = form.save()
-            
-            # The cropping coordinates are automatically saved by the form
-            # because we're using ImageRatioField which handles its own saving
-            
+            form.save()
             messages.success(request, 'Your profile has been updated successfully.')
             return redirect('core:profile')
         else:

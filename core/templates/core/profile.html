@@ -1,11 +1,9 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% load cropping %}
 
 {% block title %}Your Profile{% endblock %}
 
 {% block extra_css %}
-<link href="{% static 'image_cropping/css/jquery.Jcrop.min.css' %}" rel="stylesheet">
 <style>
     .profile-img-container img {
         width: 200px;
@@ -13,12 +11,9 @@
         object-fit: cover;
         border-radius: 50%;
     }
-    .cropping-container {
+    .photo-preview-container {
         max-width: 500px;
         margin: 20px auto;
-    }
-    .jcrop-holder {
-        margin: 0 auto;
     }
 </style>
 {% endblock %}
@@ -124,10 +119,12 @@
                                 <label for="photo" class="form-label">Profile Photo</label>
                                 <input type="file" class="form-control" id="photo" name="photo">
                                 {% if user.photo %}
-                                    <div class="cropping-container mt-3">
-                                        <h6>Crop Your Profile Photo</h6>
-                                        <p class="text-muted small">Your cropped photo will be used in the profile button. Drag to select the portion of your image you'd like to use.</p>
-                                        {% cropping user %}
+                                    <div class="photo-preview-container mt-3">
+                                        <h6>Preview Your Profile Photo</h6>
+                                        <p class="text-muted small">Your uploaded photo will be displayed here.</p>
+                                        <div class="mt-2">
+                                            <img src="{{ user.photo.url }}" alt="Profile" style="max-width: 200px; max-height: 200px;" class="img-thumbnail">
+                                        </div>
                                     </div>
                                 {% endif %}
                                 <small class="form-text text-muted">Upload a square image for best results. You can crop your photo after uploading.</small>
@@ -199,38 +196,59 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'image_cropping/js/jquery.min.js' %}"></script>
-<script src="{% static 'image_cropping/js/jquery.Jcrop.min.js' %}"></script>
-<script src="{% static 'image_cropping/js/image_cropping.js' %}"></script>
 <script>
 function toggleEditForm() {
     const form = document.getElementById('editProfileForm');
     if (form.style.display === 'none') {
         form.style.display = 'block';
-        
-        // Initialize Jcrop when form is displayed
-        setTimeout(function() {
-            if (window.jQuery && jQuery.Jcrop) {
-                jQuery('.image-cropper').each(function() {
-                    var $this = jQuery(this);
-                    if (!$this.data('jcrop')) {
-                        image_cropping.init_jcrop($this);
-                    }
-                });
-            }
-        }, 300);
     } else {
         form.style.display = 'none';
     }
 }
 
-// Don't auto-submit when photo is selected
+// Add image preview functionality
 document.getElementById('photo').addEventListener('change', function(e) {
     if (e.target.files && e.target.files[0]) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            // Preview image could be added here if needed
-        }
+            // Create preview container if it doesn't exist
+            let previewContainer = document.querySelector('.photo-preview-container');
+            if (!previewContainer) {
+                previewContainer = document.createElement('div');
+                previewContainer.className = 'photo-preview-container mt-3';
+                
+                const heading = document.createElement('h6');
+                heading.textContent = 'Preview Your Profile Photo';
+                previewContainer.appendChild(heading);
+                
+                const description = document.createElement('p');
+                description.className = 'text-muted small';
+                description.textContent = 'This is how your photo will look (cropped to fit the profile button).';
+                previewContainer.appendChild(description);
+                
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'mt-2';
+                
+                const img = document.createElement('img');
+                img.className = 'img-thumbnail';
+                img.style.maxWidth = '200px';
+                img.style.maxHeight = '200px';
+                img.alt = 'Profile Preview';
+                
+                imageDiv.appendChild(img);
+                previewContainer.appendChild(imageDiv);
+                
+                // Add preview container after the file input
+                this.parentNode.appendChild(previewContainer);
+            }
+            
+            // Update preview image
+            const img = previewContainer.querySelector('img');
+            img.src = e.target.result;
+            
+            // Show the preview container
+            previewContainer.style.display = 'block';
+        };
         reader.readAsDataURL(e.target.files[0]);
     }
 });

@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from image_cropping import ImageCropWidget
 import re
 
 User = get_user_model()
@@ -69,7 +68,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'username', 'email', 'phone', 'photo', 'cropping',
+            'username', 'email', 'phone', 'photo',
             'bio', 'date_of_birth', 'address', 'occupation',
             'education', 'social_links'
         ]
