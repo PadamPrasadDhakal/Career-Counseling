@@ -205,4 +205,10 @@ THUMBNAIL_ALIASES = {
 }
 
 # Size for the profile button image
-PROFILE_THUMBNAIL_SIZE = (28, 28) 
+PROFILE_THUMBNAIL_SIZE = (28, 28)
+
+# CSRF Settings
+CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
+CSRF_COOKIE_HTTPONLY = False
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_SAMESITE = 'Lax' 

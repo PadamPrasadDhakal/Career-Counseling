@@ -61,7 +61,21 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomLoginForm(AuthenticationForm):
     """Form for user login with email"""
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus': True}), label="Email")
+    username = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'autofocus': True,
+            'class': 'form-control',
+            'id': 'id_username'
+        }),
+        label="Email"
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'id': 'id_password'
+        }),
+        label="Password"
+    )
     remember_me = forms.BooleanField(required=False)
 
 class UserProfileForm(forms.ModelForm):

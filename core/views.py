@@ -99,6 +99,10 @@ def user_login(request):
             messages.success(request, f"Welcome back, {user.username}!")
             return redirect('core:home')
         else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+            
             # For failed login attempts, try to find user by email 
             # and record the attempt if we can identify the user
             email = form.cleaned_data.get('username') if hasattr(form, 'cleaned_data') else None
@@ -114,7 +118,6 @@ def user_login(request):
                     )
                 except User.DoesNotExist:
                     pass
-            messages.error(request, "Invalid email or password.")
     else:
         form = CustomLoginForm()
     return render(request, 'core/login.html', {'form': form})
